@@ -22,10 +22,10 @@ public class TestCreateBooking {
 
         JSONObject json = new JSONObject();
         JSONObject dates = new JSONObject();
-        dates.put("checkin","2019-08-22");
-        dates.put("checkout", "2019-08-23");
+        dates.put("checkin","2019-08-15");
+        dates.put("checkout", "2019-08-16");
         json.put("bookingid",74);
-        json.put("roomid",526);
+        json.put("roomid",941);
         json.put("firstname","asss");
         json.put("lastname","xssc");
         json.put("depositpaid","true");
@@ -35,10 +35,11 @@ public class TestCreateBooking {
         Response response = request.post("https://automationintesting.online/booking/");
 
         Assert.assertEquals(response.getStatusCode(), 201);
+        response.then().body("booking.roomid", equalTo(941));
         response.then().body("booking.firstname", equalTo("asss"));
         response.then().body("booking.lastname", equalTo("xssc"));
-        response.then().body("booking.bookingdates.checkin", equalTo("2019-08-20"));
-        response.then().body("booking.bookingdates.checkout", equalTo("2019-08-21"));
+        response.then().body("booking.bookingdates.checkin", equalTo("2019-08-15"));
+        response.then().body("booking.bookingdates.checkout", equalTo("2019-08-16"));
     }
 
     @Test
